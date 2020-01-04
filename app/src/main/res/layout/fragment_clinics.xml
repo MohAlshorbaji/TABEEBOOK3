@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ClinicsFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"/>
+
+
+
+        <EditText
+            android:id="@+id/ed_search"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:hint="بحث عن العيادات..."
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/city_searchFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:text=" فلترت البحث حسب المدينة"/>
+
+        <Button
+            android:id="@+id/clinic_type_searchFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="170dp"
+            android:text="فلترت البحث حسب نوع العيادة"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_clinics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="170dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</FrameLayout>

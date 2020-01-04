@@ -1,0 +1,27 @@
+<resources>
+    <array name="users">
+        <item>Doctor</item>
+        <item>Pharmacist</item>
+    </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="unregister">Enter as unregistered user</string>
+    <string name="app_name">Tabeebook</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="clinc">Clinc</string>
+    <string name="pharmacy">Pharmacy</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="setting">Settings</string>
+    <string name="Logout">Log Out</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
