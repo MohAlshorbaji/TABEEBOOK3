@@ -31,7 +31,7 @@
             app:itemIconTint="@color/selector"
             android:background="@color/colorWhite"
             app:menu="@menu/bottom_navigation"
-
+            app:labelVisibilityMode="labeled"
             />
     </com.google.android.material.appbar.AppBarLayout>
 </RelativeLayout>
