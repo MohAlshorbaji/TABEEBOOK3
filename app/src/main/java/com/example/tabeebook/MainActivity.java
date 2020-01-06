@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tabeebook.fragments.ClinicsFragment;
 import com.example.tabeebook.fragments.HomeFragment;
+import com.example.tabeebook.fragments.LaboratoryFragment;
 import com.example.tabeebook.fragments.PharmaciesFragment;
 import com.example.tabeebook.fragments.ProfileFragment;
 import com.example.tabeebook.models.Post;
@@ -298,8 +299,9 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.pharmacies:
                     selectedFragment = new PharmaciesFragment();
                     break;
-
-
+                case R.id.test:
+                    selectedFragment = new LaboratoryFragment();
+                    break;
             }
 
             if (selectedFragment != null) {

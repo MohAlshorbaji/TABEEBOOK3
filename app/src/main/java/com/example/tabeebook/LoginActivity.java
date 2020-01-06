@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText logEmail, logPassword;
     private Button logLogin;
     private ProgressBar progressBar;
-    private TextView txtRegister;
+    private TextView txtRegister , forget;
     Button txtEnterTheApp;
 
     //vars
@@ -42,12 +42,21 @@ public class LoginActivity extends AppCompatActivity {
         logLogin = findViewById(R.id.login_btn);
         txtEnterTheApp = findViewById(R.id.login_txt_enter_theApp);
         progressBar = findViewById(R.id.register_pb);
+       forget = findViewById(R.id.forget);
+       forget.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(LoginActivity.this,ForgetpasswordActivity.class);
+               startActivity(intent);
+           }
+       });
 
         progressBar.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
 
         txtRegister = findViewById(R.id.login_txt_register);
+
 
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override

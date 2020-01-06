@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabeebook.models.Clinic;
+import com.example.tabeebook.models.Laboratory;
 import com.example.tabeebook.models.Pharmacy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,9 +57,11 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference clinicsRef = db.collection("clinics");
     private CollectionReference pharmaciesRef = db.collection("pharmacies");
+    private CollectionReference labRef = db.collection("laboratory");
     String selectedUser;
     private Clinic mClinic;
     private Pharmacy mPharmacy;
+    private Laboratory mLaboratory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mClinic = new Clinic();
         mPharmacy = new Pharmacy();
+        mLaboratory = new Laboratory();
+
         regRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -2,6 +2,7 @@
     <array name="users">
         <item>Doctor</item>
         <item>Pharmacist</item>
+        <item>MLS</item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -17,6 +18,7 @@
     <string name="clinc">Clinc</string>
     <string name="pharmacy">Pharmacy</string>
     <string name="profile">Profile</string>
+    <string name="test">laboratory</string>
     <string name="home">Home</string>
     <string name="setting">Settings</string>
     <string name="Logout">Log Out</string>

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tabeebook.PharmacyDetailsActivity;
 import com.example.tabeebook.R;
+import com.example.tabeebook.models.Laboratory;
 import com.example.tabeebook.models.Pharmacy;
 
 import java.util.ArrayList;
