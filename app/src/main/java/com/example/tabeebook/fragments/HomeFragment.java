@@ -46,19 +46,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home,container,false);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.v = view;
         progress = new ProgressDialog(getActivity());
         progress.setTitle("Loading");
         progress.setMessage("Syncing");
         progress.setCancelable(false);
         progress.show();
-        re= v.findViewById(R.id.postRV);
+        re= view.findViewById(R.id.postRV);
         re.setHasFixedSize(true);
         re.setLayoutManager(new LinearLayoutManager(getContext()));
         arrayList = new ArrayList<Post>();
@@ -89,12 +82,17 @@ public class HomeFragment extends Fragment {
                 return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.row_post_item,parent,false));
             }
         };
-
         re.setAdapter(adapter);
         progress.dismiss();
-
-
+        return view;
 
     }
+
+
+
+
+
+
+
 }
 
