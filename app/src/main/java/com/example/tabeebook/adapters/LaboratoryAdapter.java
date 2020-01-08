@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tabeebook.LaboratoryDetailsActivity;
 import com.example.tabeebook.PharmacyDetailsActivity;
 import com.example.tabeebook.R;
 import com.example.tabeebook.models.Laboratory;
@@ -86,7 +87,7 @@ public class LaboratoryAdapter extends RecyclerView.Adapter<LaboratoryViewHolder
                // String pharmacyOwner = laboratoryList.get(position).getOwner();
                 String laboratoryOpeningHours = laboratoryList.get(position).getOpeiningHours();
                 String laboratoryImage = laboratoryList.get(position).getImage();
-                Intent intent = new Intent(context, PharmacyDetailsActivity.class);
+                Intent intent = new Intent(context, LaboratoryDetailsActivity.class);
                 intent.putExtra("laboratoryName", laboratoryName);
                 intent.putExtra("laboratoryAddress", laboratoryAddress);
                 intent.putExtra("laboratoryPhoneNumber", laboratoryPhoneNumber);

@@ -1,22 +1,26 @@
 package com.example.tabeebook.fragments;
 
-
-import android.content.Context;
-import android.net.Uri;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.example.tabeebook.FirebaseViewHolder;
+import com.example.tabeebook.Main2Activity;
 import com.example.tabeebook.R;
 import com.example.tabeebook.adapters.PostAdapter;
 import com.example.tabeebook.models.Post;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,127 +30,71 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class HomeFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private OnFragmentInteractionListener mListener;
-
-
-
-    private String mParam1;
-    private String mParam2;
-
-    RecyclerView postRecyclerView ;
-    PostAdapter postAdapter ;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference ;
-    List<Post> postList;
+    RecyclerView re;
+    View v;
+    private ArrayList<Post> arrayList;
+    ProgressDialog progress;
+    private FirebaseRecyclerAdapter<Post, FirebaseViewHolder> adapter;
+    private FirebaseRecyclerOptions<Post> options;
+    private DatabaseReference databaseReference;
 
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        View view = inflater.inflate(R.layout.fragment_home,container,false);
+        return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.v = view;
+        progress = new ProgressDialog(getActivity());
+        progress.setTitle("Loading");
+        progress.setMessage("Syncing");
+        progress.setCancelable(false);
+        progress.show();
+        re= v.findViewById(R.id.postRV);
+        re.setHasFixedSize(true);
+        re.setLayoutManager(new LinearLayoutManager(getContext()));
+        arrayList = new ArrayList<Post>();
+        options = new FirebaseRecyclerOptions.Builder<Post>().setQuery(databaseReference,Post.class).build();
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
-        postRecyclerView  = fragmentView.findViewById(R.id.postRV);
-        postRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        postRecyclerView.setHasFixedSize(true);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Posts");
-
-        return fragmentView ;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
+        databaseReference.keepSynced(true);
+        adapter = new FirebaseRecyclerAdapter<Post, FirebaseViewHolder>(options) {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int position, @NonNull final Post model) {
+                holder.title.setText(model.getTitle());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), Main2Activity.class);
+                        intent.putExtra("title",model.getTitle());
+                        startActivity(intent);
 
-                postList = new ArrayList<>();
-
-                for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
-
-                    Post post = postsnap.getValue(Post.class);
-                    postList.add(post) ;
-
-                }
-
-                postAdapter = new PostAdapter(getActivity(),postList);
-                postRecyclerView.setAdapter(postAdapter);
+                    }
+                });
 
             }
 
+            @NonNull
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.row_post_item,parent,false));
             }
-        });
+        };
+
+        re.setAdapter(adapter);
+        progress.dismiss();
 
 
 
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
-
 

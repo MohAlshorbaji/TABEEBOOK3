@@ -24,7 +24,6 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.joooonho.SelectableRoundedImageView
-                android:id="@+id/clinic_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/toolbar"
@@ -34,7 +33,15 @@
                 app:sriv_left_bottom_corner_radius="5dp"
                 app:sriv_left_top_corner_radius="5dp"
                 app:sriv_right_bottom_corner_radius="5dp"
-                app:sriv_right_top_corner_radius="5dp" />
+                app:sriv_right_top_corner_radius="5dp"
+                android:background="@drawable/splashdes"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/clinic_image"
+                android:src="@drawable/userphoto"
+                android:layout_gravity="bottom"
+></de.hdodenhof.circleimageview.CircleImageView>
 
             <include
                 android:id="@+id/toolbar"

@@ -10,7 +10,7 @@ public class Laboratory {
     private String opeiningHours;
     private String image;
 
-    public Laboratory() {
+    public Laboratory(String name, String laboratoryUserID, String laboratoryEmail, String address, String phoneNumber, String opeiningHours, String image) {
         this.name = name;
         this.laboratoryUserID = laboratoryUserID;
         this.laboratoryEmail = laboratoryEmail;
@@ -20,7 +20,7 @@ public class Laboratory {
         this.image = image;
     }
 
-    public Laboratory(String name, String laboratoryUserID, String laboratoryEmail, String address, String phoneNumber, String opeiningHours, String type, String owner, String image) {
+    public Laboratory() {
     }
 
     public String getName() {

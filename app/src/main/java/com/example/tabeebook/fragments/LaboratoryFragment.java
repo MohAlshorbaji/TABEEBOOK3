@@ -163,8 +163,6 @@ public class LaboratoryFragment extends Fragment {
                             documentSnapshot.getString("address"),
                             documentSnapshot.getString("phoneNumber"),
                             documentSnapshot.getString("opeiningHours"),
-                            documentSnapshot.getString("type"),
-                            documentSnapshot.getString("owner"),
                             documentSnapshot.getString("image")
                     );
                     laboratoryList.add(laboratory);

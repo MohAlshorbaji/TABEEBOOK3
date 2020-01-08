@@ -3,6 +3,7 @@ package com.example.tabeebook;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,10 +95,14 @@ public class EditDataActivity extends AppCompatActivity {
             clinic.put("address", clinicAddress);
             clinic.put("phoneNumber", clinicPhoneNumber);
             clinic.put("opeiningHours", clinicOpeiningHours);
-            clinic.put("typeOfClinic", clinicTypeOfClinic);
+            clinic.put("type", clinicTypeOfClinic);
             clinic.put("clinicOwner", clinicOwner);
             clinic.put("image", firebaseUser.getPhotoUrl().toString());
-            clinicsRef.document(clinicID).set(clinic);
+            clinicsRef.document(clinicID).set(clinic , SetOptions.merge());
+            Toast.makeText(this, "Data Edited", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(EditDataActivity.this,MainActivity.class);
+            startActivity(intent);
+
         } else {
             Map<String, Object> pharmacy = new HashMap<>();
             final FirebaseUser firebaseUser = mAuth.getCurrentUser();
@@ -104,10 +111,14 @@ public class EditDataActivity extends AppCompatActivity {
             pharmacy.put("address", clinicAddress);
             pharmacy.put("phoneNumber", clinicPhoneNumber);
             pharmacy.put("opeiningHours", clinicOpeiningHours);
-            pharmacy.put("typeOfClinic", clinicTypeOfClinic);
+            pharmacy.put("type", clinicTypeOfClinic);
             pharmacy.put("clinicOwner", clinicOwner);
             pharmacy.put("image", firebaseUser.getPhotoUrl().toString());
-            pharmaciesRef.document(pharmacyID).set(pharmacy);
+            pharmaciesRef.document(pharmacyID).set(pharmacy , SetOptions.merge());
+            Toast.makeText(this, "Data Edited", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(EditDataActivity.this,MainActivity.class);
+            startActivity(intent);
+
         }
     }
 }
