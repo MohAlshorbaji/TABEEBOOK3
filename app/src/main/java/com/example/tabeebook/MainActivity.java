@@ -30,6 +30,7 @@ import com.example.tabeebook.fragments.LaboratoryFragment;
 import com.example.tabeebook.fragments.PharmaciesFragment;
 import com.example.tabeebook.fragments.ProfileFragment;
 import com.example.tabeebook.models.Post;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity{
     ProgressBar popupClickProgress;
     private Uri pickedImgUri = null;
     FloatingActionButton fab;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

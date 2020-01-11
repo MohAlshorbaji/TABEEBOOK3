@@ -17,82 +17,69 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tabeebook.FirebaseViewHolder;
 import com.example.tabeebook.Main2Activity;
 import com.example.tabeebook.R;
-import com.example.tabeebook.adapters.PostAdapter;
 import com.example.tabeebook.models.Post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {
-    RecyclerView re;
-    View v;
-    private ArrayList<Post> arrayList;
-    ProgressDialog progress;
-    private FirebaseRecyclerAdapter<Post, FirebaseViewHolder> adapter;
-    private FirebaseRecyclerOptions<Post> options;
-    private DatabaseReference databaseReference;
 
 
-    @Nullable
+    RecyclerView rv;
+    DatabaseReference databaseReference;
+
+
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
-        progress = new ProgressDialog(getActivity());
-        progress.setTitle("Loading");
-        progress.setMessage("Syncing");
-        progress.setCancelable(false);
-        progress.show();
-        re= view.findViewById(R.id.postRV);
-        re.setHasFixedSize(true);
-        re.setLayoutManager(new LinearLayoutManager(getContext()));
-        arrayList = new ArrayList<Post>();
-        options = new FirebaseRecyclerOptions.Builder<Post>().setQuery(databaseReference,Post.class).build();
-
-
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
-        databaseReference.keepSynced(true);
+        rv = root.findViewById(R.id.postRV);
+
+        loadRecyclePosts();
+
+
+
+        return root;
+    }
+
+    private void loadRecyclePosts(){
+        FirebaseRecyclerOptions<Post> options;
+        FirebaseRecyclerAdapter<Post,FirebaseViewHolder> adapter;
+
+        options = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(databaseReference, Post.class).build();
+
         adapter = new FirebaseRecyclerAdapter<Post, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int position, @NonNull final Post model) {
-                holder.title.setText(model.getTitle());
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), Main2Activity.class);
-                        intent.putExtra("title",model.getTitle());
-                        startActivity(intent);
-
-                    }
-                });
-
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull Post post) {
+                firebaseViewHolder.title.setText(post.getTitle());
+                //Toast.makeText(getContext(), "" + payments.getPaymentID(), Toast.LENGTH_SHORT).show();
             }
 
             @NonNull
             @Override
             public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.row_post_item,parent,false));
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_post_item, parent, false);
+                return new FirebaseViewHolder(view);
             }
         };
-        re.setAdapter(adapter);
-        progress.dismiss();
-        return view;
+
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter.startListening();
+        rv.setAdapter(adapter);
 
     }
 
 
-
-
-
-
-
 }
-
