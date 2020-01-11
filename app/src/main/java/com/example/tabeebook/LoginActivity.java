@@ -24,7 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText logEmail, logPassword;
     private Button logLogin;
     private ProgressBar progressBar;
-    private TextView txtRegister, txtEnterTheApp;
+    private TextView txtRegister , forget;
+    Button txtEnterTheApp;
 
     //vars
     FirebaseAuth mAuth;
@@ -33,18 +34,29 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
+
 
         logEmail = findViewById(R.id.login_email);
         logPassword = findViewById(R.id.login_password);
         logLogin = findViewById(R.id.login_btn);
         txtEnterTheApp = findViewById(R.id.login_txt_enter_theApp);
         progressBar = findViewById(R.id.register_pb);
+       forget = findViewById(R.id.forget);
+       forget.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(LoginActivity.this,ForgetpasswordActivity.class);
+               startActivity(intent);
+           }
+       });
 
         progressBar.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
 
         txtRegister = findViewById(R.id.login_txt_register);
+
 
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +102,16 @@ public class LoginActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     showMessage("Authentication Failed");
                     logLogin.setVisibility(View.VISIBLE);
-                }else {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                } else {
+                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        showMessage("Please Verify Your Email");
+                        logLogin.setVisibility(View.VISIBLE);
+                    }
+
                 }
             }
         });
@@ -111,9 +129,9 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user != null) {
+        if (user != null && user.isEmailVerified()) {
             // redirect user to his home page
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
     }

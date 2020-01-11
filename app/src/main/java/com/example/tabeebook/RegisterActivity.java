@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabeebook.models.Clinic;
+import com.example.tabeebook.models.Laboratory;
 import com.example.tabeebook.models.Pharmacy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Spinner chooseUser;
     ImageView imgUserPhoto;
-    ImageView addProfileImage;
+    TextView addProfileImage;
+
 
     static int REQUESCODE = 1;
     Uri pickedImageUri;
@@ -55,14 +57,18 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference clinicsRef = db.collection("clinics");
     private CollectionReference pharmaciesRef = db.collection("pharmacies");
+    private CollectionReference labRef = db.collection("laboratory");
     String selectedUser;
     private Clinic mClinic;
     private Pharmacy mPharmacy;
+    private Laboratory mLaboratory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
+
 
         regUsername = findViewById(R.id.register_username);
         regEmail = findViewById(R.id.register_email);
@@ -70,8 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
         regRegister = findViewById(R.id.register_btn);
         progressBar = findViewById(R.id.register_pb);
         chooseUser = findViewById(R.id.choose_user);
-        addProfileImage = findViewById(R.id.user_profile_img);
-        //imgUserPhoto = findViewById(R.id.user_profile_img);
+        //addProfileImage = findViewById(R.id.text_add_image);
+        imgUserPhoto = findViewById(R.id.user_profile_img);
 
         selectedUser = (String) chooseUser.getSelectedItem();
         progressBar.setVisibility(View.INVISIBLE);
@@ -79,6 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mClinic = new Clinic();
         mPharmacy = new Pharmacy();
+        mLaboratory = new Laboratory();
+
         regRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        addProfileImage.setOnClickListener(new View.OnClickListener() {
+        imgUserPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -133,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUserAccount(final String name, final String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
@@ -156,12 +164,24 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                    finish();
-                                    updateUserInfo(name, pickedImageUri, mAuth.getCurrentUser());
-                                    showMessage("Registration Complete");
-                                } else {
-                                    showMessage(task.getException().getMessage());
+                                    firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("Email", "Email sent.");
+                                                showMessage("Registration Complete , Please Verify your email");
+                                                regUsername.setText("");
+                                                regEmail.setText("");
+                                                regPassword.setText("");
+                                                regRegister.setVisibility(View.VISIBLE);
+                                                progressBar.setVisibility(View.INVISIBLE);
+                                                updateUserInfo(name,pickedImageUri, mAuth.getCurrentUser());
+                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                            } else {
+                                                showMessage(task.getException().getMessage());
+                                            }
+                                        }
+                                    });
                                 }
                             }
                         });
@@ -182,14 +202,25 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                                    finish();
-                                    updateUserInfo(name, pickedImageUri, mAuth.getCurrentUser());
-                                    showMessage("Registration Complete");
-                                } else {
-                                    showMessage(task.getException().getMessage());
+                                    firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("Email", "Email sent.");
+                                                showMessage("Registration Complete , Please Verify your email");
+                                                regUsername.setText("");
+                                                regEmail.setText("");
+                                                regPassword.setText("");;
+                                                regRegister.setVisibility(View.VISIBLE);
+                                                progressBar.setVisibility(View.INVISIBLE);
+                                                updateUserInfo(name,pickedImageUri, mAuth.getCurrentUser());
+                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                            } else {
+                                                showMessage(task.getException().getMessage());
+                                            }
+                                        }
+                                    });
                                 }
-
                             }
                         });
 
@@ -200,7 +231,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void updateUserInfo(final String name, Uri pickedImageUri, final FirebaseUser currentUser) {
+    private void updateUserInfo(final String name,Uri pickedImageUri, final FirebaseUser currentUser) {
 
 
         StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_pictures");
