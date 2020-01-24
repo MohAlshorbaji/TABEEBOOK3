@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tabeebook.FirebaseViewHolder;
 import com.example.tabeebook.Main2Activity;
 import com.example.tabeebook.R;
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull Post post) {
                 firebaseViewHolder.title.setText(post.getTitle());
+
                 //Toast.makeText(getContext(), "" + payments.getPaymentID(), Toast.LENGTH_SHORT).show();
             }
 

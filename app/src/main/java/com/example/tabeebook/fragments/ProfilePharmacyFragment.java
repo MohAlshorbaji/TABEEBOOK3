@@ -1,6 +1,5 @@
 package com.example.tabeebook.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tabeebook.EditDataActivity;
@@ -28,22 +26,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ProfileFragment extends Fragment {
+
+public class ProfilePharmacyFragment extends Fragment {
 
     ImageView userImg;
-    TextView userEmail, username,type,time;
-    private Button logoutUser, editData;
-
+    TextView userEmail, username;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference clinicsRef = db.collection("clinics");
+    private CollectionReference pharmacyRef = db.collection("pharmacies");
 
-
-    public ProfileFragment() {
+    public ProfilePharmacyFragment() {
         // Required empty public constructor
     }
 
@@ -51,8 +44,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        View root = inflater.inflate(R.layout.fragment_profile_pharmacy, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -60,56 +52,31 @@ public class ProfileFragment extends Fragment {
         userImg = root.findViewById(R.id.user_image_profile);
         userEmail = root.findViewById(R.id.email_show_user);
         username = root.findViewById(R.id.show_user_name);
-        type = root.findViewById(R.id.clinc_type_desc);
-        time = root.findViewById(R.id.time_from_to_desc);
 
-
-       // logoutUser = root.findViewById(R.id.logout_user);
-        //editData = root.findViewById(R.id.editDataBtn);
-      //  logoutUser.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-         //   public void onClick(View view) {
-           //     FirebaseAuth.getInstance().signOut();
-            //    getActivity().finish();
-             //   startActivity(new Intent(getActivity(), LoginActivity.class));
-           // }
-      //  });
-
-
-        updateProfileDoctor();
+        updateProfilePharmacist();
 
 
         return root;
     }
 
-    private void updateProfileDoctor() {
-        DocumentReference clinicDocRef = clinicsRef.document(currentUser.getUid());
-        clinicDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    private void updateProfilePharmacist() {
+
+        DocumentReference pharmacyDocRef = pharmacyRef.document(currentUser.getUid());
+        pharmacyDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot document = task.getResult();
                 if (document != null) {
                     username.setText(document.getString("name"));
 
-
-                    Glide.with(getActivity()).load(document.getString("image")).into(userImg);
-                    Toast.makeText(getActivity(),document.getString("image"), Toast.LENGTH_SHORT).show();
-
-
+                        Glide.with(getActivity()).load(document.getString("image")).into(userImg);
+                    }
                 }
-            }
+
         });
         userEmail.setText(currentUser.getEmail());
-    }
-
-
-    private void updateProfilePharmacist() {
-        userEmail.setText(currentUser.getEmail());
-        username.setText(currentUser.getDisplayName());
-        type.setText(currentUser.getPhoneNumber());
-
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(userImg);
 
     }
+
 
 }

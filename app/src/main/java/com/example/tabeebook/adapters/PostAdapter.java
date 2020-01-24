@@ -64,8 +64,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.row_post_title);
-           // imgPost = itemView.findViewById(R.id.row_post_img);
-           // imgPostProfile = itemView.findViewById(R.id.row_post_profile_img);
+            imgPost = itemView.findViewById(R.id.row_post_img);
+            imgPostProfile = itemView.findViewById(R.id.row_post_profile_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,6 +78,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                     postDetailActivity.putExtra("description",mData.get(position).getDescription());
                     postDetailActivity.putExtra("postKey",mData.get(position).getPostKey());
                     postDetailActivity.putExtra("userPhoto",mData.get(position).getUserPhoto());
+
                     // will fix this later i forgot to add user name to post object
                     //postDetailActivity.putExtra("userName",mData.get(position).getUsername);
                     long timestamp  = (long) mData.get(position).getTimeStamp();

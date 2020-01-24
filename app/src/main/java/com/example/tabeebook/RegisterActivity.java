@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabeebook.models.Clinic;
+import com.example.tabeebook.models.Laboratory;
 import com.example.tabeebook.models.Pharmacy;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,14 +56,17 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference clinicsRef = db.collection("clinics");
     private CollectionReference pharmaciesRef = db.collection("pharmacies");
+    private CollectionReference LaboratoryRef = db.collection("laboratory");
     String selectedUser;
     private Clinic mClinic;
     private Pharmacy mPharmacy;
+    private Laboratory mLaboratory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        pickedImageUri = Uri.parse(placehoder);
 
         regUsername = findViewById(R.id.register_username);
         regEmail = findViewById(R.id.register_email);
@@ -161,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-                                    startActivity(new Intent(RegisterActivity.this, EditDataActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                     finish();
                                     updateUserInfo(name, pickedImageUri, mAuth.getCurrentUser());
                                     showMessage("Registration Complete");
@@ -192,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, MainActivityPharmacy.class));
                                     finish();
                                     updateUserInfo(name, pickedImageUri, mAuth.getCurrentUser());
                                     showMessage("Registration Complete");

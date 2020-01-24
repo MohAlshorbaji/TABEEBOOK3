@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="140dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardElevation="20dp"
+    android:background="@drawable/custom_circle">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/row_post_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+     android:background="@drawable/ic_launcher_background"></ImageView>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splashdes"></ImageView>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/black_gradient"></ImageView>
-
+       android:background="@drawable/black_gradient"></ImageView>
 
     <TextView
         android:id="@+id/row_post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="text"
         android:textColor="#fff"
         android:textStyle="bold"
         android:layout_margin="10dp"
@@ -29,9 +37,10 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentEnd="true"
         android:id="@+id/row_post_profile_img"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
     android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/userphoto" />
-</RelativeLayout>
+        android:src="@drawable/doctor_logo" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -16,7 +16,7 @@
         android:icon="@drawable/pharmacy"/>
 
     <item
-        android:id="@+id/test"
+        android:id="@+id/laboratories"
         android:title="@string/test"
         android:icon="@drawable/micro"/>
     <item
