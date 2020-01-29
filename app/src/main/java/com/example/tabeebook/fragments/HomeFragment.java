@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import com.example.tabeebook.R;
 import com.example.tabeebook.models.Post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView rv;
     DatabaseReference databaseReference;
+    FloatingActionButton fb ;
 
 
 
@@ -47,6 +51,7 @@ public class HomeFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
         rv = root.findViewById(R.id.postRV);
 
+        fb = root.findViewById(R.id.fab);
         loadRecyclePosts();
 
 
@@ -63,8 +68,17 @@ public class HomeFragment extends Fragment {
 
         adapter = new FirebaseRecyclerAdapter<Post, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull Post post) {
+            protected void onBindViewHolder(@NonNull FirebaseViewHolder firebaseViewHolder, int i, @NonNull final Post post) {
                 firebaseViewHolder.title.setText(post.getTitle());
+                firebaseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(),Main2Activity.class);
+                        intent.putExtra("Desc",post.getDescription());
+                        startActivity(intent);
+
+                    }
+                });
 
                 //Toast.makeText(getContext(), "" + payments.getPaymentID(), Toast.LENGTH_SHORT).show();
             }

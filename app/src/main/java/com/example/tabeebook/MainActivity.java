@@ -333,6 +333,9 @@ public class MainActivity extends AppCompatActivity{
                 this.finish();
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
+            case R.id.change_pass:
+                startActivity(new Intent(this, ForgetpasswordActivity.class));
+                break;
 
         }
         return super.onOptionsItemSelected(item);
