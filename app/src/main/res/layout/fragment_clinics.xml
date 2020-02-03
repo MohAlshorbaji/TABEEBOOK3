@@ -22,11 +22,26 @@
             android:layout_height="wrap_content" />
 
         <Button
+            android:background="@drawable/custom_circle_white"
             android:id="@+id/city_searchFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
-            android:text=" فلترت البحث حسب المدينة"/>
+            android:text=" فلتر البحث حسب المدينة"/>
+        <Button
+            android:drawablePadding="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Filter"
+            android:textSize="24dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.PopupMenu.Header"
+            android:textColor="#15e4be"
+            android:drawableLeft="@drawable/ic_action_info"
+            android:padding="16dp"
+            android:src="@drawable/ic_action_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
         <Button
             android:id="@+id/clinic_type_searchFilter"

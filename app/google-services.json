@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "747907349930",
-    "firebase_url": "https://taboobook-8d51c.firebaseio.com",
-    "project_id": "taboobook-8d51c",
-    "storage_bucket": "taboobook-8d51c.appspot.com"
+    "project_number": "255350215618",
+    "firebase_url": "https://tabeebook-c548d.firebaseio.com",
+    "project_id": "tabeebook-c548d",
+    "storage_bucket": "tabeebook-c548d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:747907349930:android:71dff603e77626f7827fd3",
+        "mobilesdk_app_id": "1:255350215618:android:cc0baae9abce60d3d5fc5b",
         "android_client_info": {
           "package_name": "com.example.tabeebook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "747907349930-5n59rt3foi9hokak6an7an5d25u2nglj.apps.googleusercontent.com",
+          "client_id": "255350215618-fsj460gs7lnj8hegt2aruir3eqrv3fo5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tabeebook",
+            "certificate_hash": "271aed855446a65db85f58f8c9a27e5a8d49bf6e"
+          }
+        },
+        {
+          "client_id": "255350215618-1th0c9v6bm357fsjjcfh28lj2prfig6a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA46oCg7vANpG_1kzVJdBgby1XMUHrpIOg"
+          "current_key": "AIzaSyBRG_ChPGm-hof12x59h9zhZcRgCWHIA0E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "747907349930-5n59rt3foi9hokak6an7an5d25u2nglj.apps.googleusercontent.com",
+              "client_id": "255350215618-1th0c9v6bm357fsjjcfh28lj2prfig6a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

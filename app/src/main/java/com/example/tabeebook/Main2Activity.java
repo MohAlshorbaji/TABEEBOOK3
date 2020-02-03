@@ -16,7 +16,6 @@ public class Main2Activity extends AppCompatActivity {
         De = findViewById(R.id.tv1);
         String Desc = getIntent().getStringExtra("Desc");
         De.setText(Desc);
-        Toast.makeText(this, ""+Desc, Toast.LENGTH_SHORT).show();
 
 
 
