@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ClinicsFragment">
+    tools:context=".fragments.ClinicsFragment"
+    android:background="@color/colorWhite">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -20,37 +21,35 @@
             android:layout_width="match_parent"
             android:hint="بحث عن العيادات..."
             android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/filter_sahpe"
+                android:id="@+id/city_searchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="110dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text=" فلتر البحث حسب المدينة"
+                android:layout_weight="1"
+                android:textAlignment="center"/>
+            <Button
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/filter_sahpe"
+                android:id="@+id/clinic_type_searchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="110dp"
+                android:text="فلتر البحث حسب نوع العيادة"
+                android:layout_weight="1"/>
 
-        <Button
-            android:background="@drawable/custom_circle_white"
-            android:id="@+id/city_searchFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:text=" فلتر البحث حسب المدينة"/>
-        <Button
-            android:drawablePadding="16dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Filter"
-            android:textSize="24dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.PopupMenu.Header"
-            android:textColor="#15e4be"
-            android:drawableLeft="@drawable/ic_action_info"
-            android:padding="16dp"
-            android:src="@drawable/ic_action_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-        <Button
-            android:id="@+id/clinic_type_searchFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:layout_marginStart="170dp"
-            android:text="فلترت البحث حسب نوع العيادة"/>
-
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_clinics"
             android:layout_width="match_parent"

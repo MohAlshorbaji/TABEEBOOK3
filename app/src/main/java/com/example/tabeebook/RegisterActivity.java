@@ -37,8 +37,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    final static String placehoder = "https://firebasestorage.googleapis.com/v0/b/tabeebook-7f719.appspot.com/o/placeholder_persin.png?alt=media&token=bf237109-47c2-4c69-8f34-12ada7603a60";
-
+    final static String placehoder = "https://firebasestorage.googleapis.com/v0/b/tabeebook-c548d.appspot.com/o/doctrouser.png?alt=media&token=170b3af4-709c-4a3c-8317-2eed8479da6d";
 
     //widgets:
     EditText regUsername, regEmail, regPassword;
@@ -165,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
 
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, EditDataActivity.class));
                                     finish();
                                     updateUserInfo(name, pickedImageUri, mAuth.getCurrentUser());
                                     showMessage("Registration Complete");

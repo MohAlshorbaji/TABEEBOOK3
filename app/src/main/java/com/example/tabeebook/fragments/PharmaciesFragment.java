@@ -105,7 +105,7 @@ public class PharmaciesFragment extends Fragment {
 
                 builder.setTitle("فلترت البحث حسب المكان");
                 builder.setItems(new CharSequence[]
-                                {"غزة", "خانيونس", "رفح", "دير البلح"},
+                                {"غزة", "خانيونس", "رفح", "دير البلح","النصيرات", "المغازي", "البريج", "شمال غزة","رام الله","نابلس","الخليل","جنين","يطا","البيرة","قلقيلية","بيت لحم","طوباس","بيت ساحور","سلفيت ","بيت جالا","طول كرم","فلسطين المحتلة"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
@@ -123,6 +123,58 @@ public class PharmaciesFragment extends Fragment {
                                     case 3:
                                         edSearch.setText("دير البلح");
                                         break;
+                                    case 4:
+                                        edSearch.setText("النصيرات");
+                                        break;
+                                    case 5:
+                                        edSearch.setText("المغازي");
+                                        break;
+                                    case 6:
+                                        edSearch.setText("البريج");
+                                        break;
+                                    case 7:
+                                        edSearch.setText("شمال غزة");
+                                        break;
+                                    case 8:
+                                        edSearch.setText("رام الله");
+                                        break;
+                                    case 9:
+                                        edSearch.setText("نابلس");
+                                        break;
+                                    case 10:
+                                        edSearch.setText("دير البلح");
+                                        break;
+                                    case 11:
+                                        edSearch.setText("الخليل");
+                                        break;
+                                    case 12:
+                                        edSearch.setText("جنين");
+                                        break;
+                                    case 13:
+                                        edSearch.setText("يطا");
+                                        break;
+                                    case 14:
+                                        edSearch.setText("البيرة");
+                                        break;   case 15:
+                                        edSearch.setText("قلقيلية");
+                                        break;
+                                    case 16:
+                                        edSearch.setText("بيت لحم");
+                                        break;
+                                    case 17:
+                                        edSearch.setText("طوباس");
+                                        break;   case 18:
+                                        edSearch.setText("بيت ساحور");
+                                        break;   case 19:
+                                        edSearch.setText("بيت جالا");
+                                        break;
+                                    case 20:
+                                        edSearch.setText("طول كرم");
+                                        break;
+                                    case 21:
+                                        edSearch.setText("فلسطين المحتلة");
+                                        break;
+
                                 }
                             }
                         });

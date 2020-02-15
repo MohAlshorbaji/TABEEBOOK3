@@ -26,8 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
  */
 public class ProfileFragment extends Fragment {
     ImageView userImg;
-    TextView userEmail, username;
-    private Button logoutUser, editData;
+    TextView userEmail, username,type,duration,mobile;
+    private Button logoutUser,editData;
 
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
@@ -53,6 +53,10 @@ public class ProfileFragment extends Fragment {
         userImg = root.findViewById(R.id.user_image_profile);
         userEmail = root.findViewById(R.id.email_show_user);
         username = root.findViewById(R.id.show_user_name);
+        type = root.findViewById(R.id.clinc_type_desc);
+        duration = root.findViewById(R.id.duration);
+        mobile = root.findViewById(R.id.mobile_desc);
+
 
 
 
@@ -70,6 +74,9 @@ public class ProfileFragment extends Fragment {
                 if (document != null) {
                     username.setText(document.getString("name"));
                     Glide.with(getActivity()).load(document.getString("image")).into(userImg);
+                    type.setText((document.getString("type")));
+                    duration.setText(document.getString("opeiningHours"));
+                    mobile.setText(document.getString("phoneNumber"));
                 }
             }
         });

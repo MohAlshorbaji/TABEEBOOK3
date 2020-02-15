@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
         rv = root.findViewById(R.id.postRV);
-
         fb = root.findViewById(R.id.fab);
         loadRecyclePosts();
 
@@ -75,6 +74,8 @@ public class HomeFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(),Main2Activity.class);
                         intent.putExtra("Desc",post.getDescription());
+                        intent.putExtra("Title",post.getTitle());
+                        intent.putExtra("UserImg",post.getPicture());
                         startActivity(intent);
 
                     }

@@ -34,7 +34,7 @@
                 app:sriv_left_top_corner_radius="5dp"
                 app:sriv_right_bottom_corner_radius="5dp"
                 app:sriv_right_top_corner_radius="5dp"
-                android:background="@drawable/splashdes"/>
+                android:background="@drawable/ic_launcher_background"/>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"

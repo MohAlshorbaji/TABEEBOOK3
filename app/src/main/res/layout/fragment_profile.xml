@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,7 +60,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_one_login"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="290dp"
                     android:elevation="10dp"
@@ -70,7 +68,8 @@
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp"
                     app:cardPreventCornerOverlap="false"
-                    app:cardUseCompatPadding="true">
+                    app:cardUseCompatPadding="true"
+                    android:padding="10dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -110,7 +109,7 @@
                         <TextView
                             android:layout_marginStart="2dp"
                             android:layout_marginTop="5dp"
-                            android:id="@+id/time_from_to_desc"
+                            android:id="@+id/duration"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/email_show_user"
@@ -136,6 +135,45 @@
                             android:text="نوع العيادة"
                             android:textColor="@color/colorWhite"
                             android:layout_toEndOf="@+id/click_type"></TextView>
+                        <TextView
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/mobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/clinc_type_desc"
+                            android:text="رقم الهاتف :  "
+                            android:textColor="@color/colorWhite"></TextView>
+                        <TextView
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/mobile_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/clinc_type_desc"
+                            android:text="0599"
+                            android:textColor="@color/colorWhite"
+                            android:layout_toEndOf="@+id/mobile"></TextView>
+                        <TextView
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/mobile_desc"
+                            android:text="عنوان العيادة :  "
+                            android:textColor="@color/colorWhite"></TextView>
+                        <TextView
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/address_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/mobile_desc"
+                            android:text="العنوان"
+                            android:textColor="@color/colorWhite"
+                            android:layout_toEndOf="@+id/address"></TextView>
+
 
 
 
